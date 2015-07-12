@@ -22,4 +22,4 @@ or use bundler:
 
 1. cd /path/to/example_sinatra_form
 
-2. ruby smc_form.rb
+2. bundle exec ruby pd_form.rb 

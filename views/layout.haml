@@ -1,33 +1,44 @@
 !!! 5
 %html
   %head
-    %title SMC Form 
+    %title pd Form 
     
-    %script{:type => "text/javascript",
-        :src  => "/js/vendor/jquery-1.7.min.js"}
-    %script{:type => "text/javascript",
-        :src  => "/js/vendor/jquery.form.js"}
-    %script{:type => "text/javascript",
-        :src  => "/js/vendor/jquery.validate.js"}
+    %script{:type => "text/javascript", :src  => "/js/vendor/jquery-1.7.min.js"}
+    
+    %link{:rel => "stylesheet", :href => "//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" }
+    %script{:type => "text/javascript", :src =>"//code.jquery.com/jquery-1.10.2.js"}
+    %script{:type => "text/javascript", :src => "//code.jquery.com/ui/1.11.4/jquery-ui.js"}
+    
+    %script{:type => "text/javascript", :src  => "/js/vendor/jquery-ui.multidatespicker.js"}
+    %script{:type => "text/javascript", :src  => "/js/vendor/jquery.form.js"}
+    %script{:type => "text/javascript", :src  => "/js/vendor/jquery.validate.js"}
+    %script{:type => "text/javascript", :src  => "/js/vendor/autogrow.min.js"}
 
     %script{:type => "text/javascript"}
       :plain
         $(document).ready( function() {
 
-          $('#smcForm').validate({
+          $('#pdForm').validate({
             submitHandler: function(form) {
               jQuery(form).ajaxSubmit({
                 target: "#result"
               });
-              $("#smcForm :input").attr("disabled", true);
+              $("#pdForm :input").attr("disabled", true);
             }
           });
 
           $('#reset').click(function() {
-            $('#smcForm').validate().resetForm();
-            $('#smcForm').clearForm();
+            $('#pdForm').validate().resetForm();
+            $('#pdForm').clearForm();
           });
-          
+
+          var today = new Date();
+          $('#datezpicker').multiDatesPicker({
+            minDate: 0,
+            maxDate: 60,
+            altField: '#specificdatez'
+          });
+
         } );
 
     %style{:type => "text/css"}
@@ -39,18 +50,28 @@
             background-color: #ffc;
             border: 1px solid #c00;
         }
-        body{font-size:1em;background:#CCC;}
+        body{font-size:1em;background:#FFF;}
         h1{margin-bottom:20px;}
         
         label{display:block; margin-right: 2em; margin-top:1em; width:250px;}
         input[type=text]{width:200px;}
         form{width:500px;margin:2em;}
-        p{font-size:.8em;}
-        
+        p{font-size:.8em;margin:2em}
+        /* begin: jQuery UI Datepicker moving pixels fix */
+        table.ui-datepicker-calendar {border-collapse: separate;}
+        .ui-datepicker-calendar td {border: 1px solid transparent;}
+        /* end: jQuery UI Datepicker moving pixels fix */
+        /* begin: jQuery UI Datepicker emphasis on selected dates */
+        .ui-datepicker .ui-datepicker-calendar .ui-state-highlight a {
+        background: #ff6600 none; /* a color that fits the widget theme */
+        color: white; /* a color that is readeable with the color above */
+        }
+        /* end: jQuery UI Datepicker emphasis on selected dates */
+        div.ui-datepicker{font-size:0.85em;}      
         
   %body
     #header
-      %h1 SMC Form
+      %h1 Programming computer multimedia with PureData
     #content
       =yield
   %footer

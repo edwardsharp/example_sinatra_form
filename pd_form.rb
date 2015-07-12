@@ -6,17 +6,18 @@ require 'haml'
 #require 'datamapper'
 require 'dm-core'
 require 'dm-timestamps'
-require 'dm-postgres-adapter'
+# require 'dm-postgres-adapter'
+require 'dm-sqlite-adapter'
 require 'dm-migrations'
 require 'pony'
 
-SEND_TO = 'edward.sharp@singlemindconsulting.com'
+SEND_TO = 'hello@lacuna.club'
 Pony.options = {
   :via => :smtp,
   :via_options => {
     :address => 'smtp.sendgrid.net',
     :port => '587',
-    :domain => 'heroku.com',
+    :domain => 'lacuna.club',
     :user_name => ENV['SENDGRID_USERNAME'],
     :password => ENV['SENDGRID_PASSWORD'],
     :authentication => :plain,
@@ -25,24 +26,23 @@ Pony.options = {
 }
 
 DataMapper::Logger.new($stdout, :debug)
-#DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/smc_form.sqlite")
-DataMapper::setup(:default, ENV['DATABASE_URL'])
+DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/pd_form.sqlite")
+# DataMapper::setup(:default, ENV['DATABASE_URL'])
 
-class SMCResponseForm
+class PdResponseForm
   include DataMapper::Resource
   property :id, Serial
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  property :tech_contact_name, Text, :required => true, :default => 'NULL'
-  property :tech_contact_email, Text, :required => true, :default => 'NULL'
-  property :tech_contact_phone, Text, :required => true, :default => 'NULL'
-  property :lms_used, Text, :required => true, :default => 'NULL'
-  property :other_lms_name, Text, :default => 'NULL'
-  property :other_lms_version, Text, :default => 'NULL'
-  property :lms_localhost, Text, :required => true, :default => 'NULL'
-  property :lms_test_env, Text, :required => true, :default => 'NULL'
-
+  property :name, Text, :required => true, :default => 'NULL'
+  property :email, Text, :required => true, :default => 'NULL'
+  property :topicz, Text, :required => true, :default => 'NULL'
+  property :datez, Text, :default => 'NULL'
+  property :specificdatez, Text, :default => 'NULL'
+  property :newtopd, Text, :default => 'NULL'
+  property :other, Text, :default => 'NULL'
+ 
 end
 
 # perform basic sanity checks and initialize all relationships
@@ -50,9 +50,9 @@ end
 DataMapper.finalize
 
 # create the table
-#SMCResponseForm.auto_migrate! 
+#PdResponseForm.auto_migrate! 
 #drop & recreate db
-SMCResponseForm.auto_upgrade!
+PdResponseForm.auto_upgrade!
 
 
 configure do
@@ -73,17 +73,17 @@ post '/' do
   # params.each do |y|
   #   p y
   # end
-	@results = SMCResponseForm.new params
+	@results = PdResponseForm.new params
   @results.created_at = Time.now
   @results.updated_at = Time.now
 
   if @results.save
     Pony.mail :to => SEND_TO,
-        :from => 'SMC_FORM@singlemind.co',
-        :subject => 'SMC_FORM',
+        :from => 'pd_form@lacuna.club',
+        :subject => 'Pd_form',
         :body => "#{params.inspect}"
 
-    "success!"
+    "thank you!"
   else
     "fail! #{@results.errors.to_s}"
   end

@@ -1,47 +1,64 @@
-%h3 ﻿Example inquiry form
+%h3 ﻿WORKSHOP INFORMATION
 
-%form(action='/' method='POST' id='smcForm')
+%p 
+  %a{:title => 'http://LACUNA.CLUB', :href => 'http://lacuna.club'}LACUNA 
+  (a studio space in NE PDX) is hosting a variety of topics around the theory and use of 
+  %a{:title => 'puredata website', :href => 'http://puredata.info'}PureData.  
 
-  %label Technical Contact Name: 
-  %input(type='text' name='tech_contact_name' title='Please enter some input (at least 2 characters)' class='required' minlength='2')
 
-  %label Technical Contact email and/or IM: 
-  %input(type='text' name='tech_contact_email' title='Please enter some input (at least 3 characters)' class='required' minlength='3')
+%h3 WORKSHOP INQUIRY FORM
 
-  %label Technical Contact phone: 
-  %input(type='text' name='tech_contact_phone' title='Please enter some input (at least 3 characters)' class='required' minlength='3')
+%form(action='/' method='POST' id='pdForm')
 
-  %label Name of LMS Used:
-  %input{:type => "checkbox", :value => "sakai25", :name => "lms_used[]", :id => "lms_used1", :class => "required"} Sakai 2.5
-  %input{:type => "checkbox", :value => "sakai26", :name => "lms_used[]", :id => "lms_used2"} Sakai 2.6
-  %input{:type => "checkbox", :value => "sakai27", :name => "lms_used[]", :id => "lms_used3"} Sakai 2.7
-  %input{:type => "checkbox", :value => "sakai27", :name => "lms_used[]", :id => "lms_used3"} Sakai 2.7
+  %label who are you? 
+  %input(type='text' name='name' title='Please enter some input (at least 2 characters)' class='required' minlength='2')
+
+  %label what's your email? 
+  %input(type='text' name='email' title='Please enter some input (at least 3 characters)' class='required' minlength='3')
+
+
+  %label topics of interest?
+  %input{:type => "checkbox", :value => "synth", :name => "topicz[]", :id => "topicz1", :class => "required"} sound synthesis
   %br
-  %input{:type => "checkbox", :value => "moodle19", :name => "lms_used[]", :id => "lms_used4"} Moodle 1.9
-  %input{:type => "checkbox", :value => "moodle20", :name => "lms_used[]", :id => "lms_used5"} Moodle 2.0
-  %input{:type => "checkbox", :value => "moodle21", :name => "lms_used[]", :id => "lms_used6"} Moodle 2.1
-  %input{:type => "checkbox", :value => "moodle22", :name => "lms_used[]", :id => "lms_used7"} Moodle 2.2
+  %input{:type => "checkbox", :value => "dmxlighting", :name => "topicz[]", :id => "topicz2"} dmx lighting 
   %br
-  %input{:type => "checkbox", :value => "canvas", :name => "lms_used[]", :id => "lms_used8"} Canvas
+  %input{:type => "checkbox", :value => "raspberrpi", :name => "topicz[]", :id => "topicz3"} raspberry pi
+  %br
+  %input{:type => "checkbox", :value => "videogem", :name => "topicz[]", :id => "topicz3"} video (gem)
+  %br
+  %input{:type => "checkbox", :value => "osc", :name => "topicz[]", :id => "topicz4"} OSC
+  %br
+  %input{:type => "checkbox", :value => "streamingaudio", :name => "topicz[]", :id => "topicz5"} streaming audio
+  %br
+  %input{:type => "checkbox", :value => "syncingvideo", :name => "topicz[]", :id => "topicz6"} syncing video
+  %br
+  %input{:type => "checkbox", :value => "sequencing", :name => "topicz[]", :id => "topicz7"} sequencing
+  %br
+  %input{:type => "checkbox", :value => "sampling", :name => "topicz[]", :id => "topicz8"} sampling
+  %br
+  %input{:type => "checkbox", :value => "generaltheoryandoperation", :name => "topicz[]", :id => "topicz8"} general theory & operation
+  %br
+  %input{:type => "checkbox", :value => "other", :name => "topicz[]", :id => "topicz8"} other
 
-  %label Other: 
-  %input(type='text' name='other_lms_name' title='Please enter some input (at least 3 characters)' minlength='3')
+  %label general date/time preference?
+  %input{:type => "checkbox", :value => "saturdayafternoon", :name => "datez[]", :id => "datez1", :class => "required"} weekend afternoon
+  %br
+  %input{:type => "checkbox", :value => "sundayafternoon", :name => "datez[]", :id => "datez2"} weekday afternoon
+  %br
+  %input{:type => "checkbox", :value => "tuesdayevening", :name => "datez[]", :id => "datez3"} weekday evening
+  
 
-  %label Version: 
-  %input(type='text' name='other_lms_version' title='Please enter some input (at least 3 characters)' minlength='3')
+  %label specific dates? (check all that apply)
+  %div{:id => "datezpicker"}
+  %input{:type => "text", :name => "specificdatez", :id => "specificdatez", :type => "hidden"}
+  
+  %label are you new to PureData? 
+  %input{:type => "radio", :value => "yes", :name => "newtopd[]", :id => "newtopd1", :class => "required"} yes
+  %input{:type => "radio", :value => "no", :name => "newtopd[]", :id => "newtopd2"} no
+  
+  %label anything else?
+  %input(type='textarea' name='other' id='other' title='Please enter some input (at least 3 characters)' class='required' minlength='3' data-autosize-input='{ "space": 20 }')
 
-  %br 
-  
-  %label Is the LMS installed locally? 
-  %input{:type => "radio", :value => "yes", :name => "lms_localhost[]", :id => "lms_localhost1", :class => "required"} Yes
-  %input{:type => "radio", :value => "no", :name => "lms_localhost[]", :id => "lms_localhost2"} No
-  %input{:type => "radio", :value => "idk", :name => "lms_localhost[]", :id => "lms_localhost3"} I don't know
-  
-  %label Is a testing environment available?
-  %input{:type => "radio", :value => "yes", :name => "lms_test_env[]", :id => "test_env1", :class => "required"} Yes
-  %input{:type => "radio", :value => "no", :name => "lms_test_env[]", :id => "test_env2"} No
-  %input{:type => "radio", :value => "idk", :name => "lms_test_env[]", :id => "test_env3"} I don't know
-  
   %br
   %br
   %input(type='button' value='Reset' name='reset' id='reset')
