@@ -16,12 +16,18 @@
 
     %script{:type => "text/javascript"}
       :plain
+        function pd_form_success(responseText, statusText, xhr, $form)
+        {
+            $("body").animate({ scrollTop: $('body')[0].scrollHeight}, 1000);
+        }
+
         $(document).ready( function() {
 
           $('#pdForm').validate({
             submitHandler: function(form) {
               jQuery(form).ajaxSubmit({
-                target: "#result"
+                target: "#result",
+                success: pd_form_success
               });
               $("#pdForm :input").attr("disabled", true);
             }
@@ -68,6 +74,8 @@
         }
         /* end: jQuery UI Datepicker emphasis on selected dates */
         div.ui-datepicker{font-size:0.85em;}      
+
+        #result{font-size:3em;margin:3em 0 3em 0;}
         
   %body
     #header
