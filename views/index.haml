@@ -2,11 +2,20 @@
 
 %p 
   %a{:title => 'http://LACUNA.CLUB', :href => 'http://lacuna.club'}LACUNA 
-  (a studio space in NE PDX) is hosting a variety of topics around the theory and use of 
-  %a{:title => 'puredata website', :href => 'http://puredata.info'}PureData.  
+  (a studio space in NE PDX) is hosting workshops on a variety of topics around the theory and operation of the free and open source software 
+  %a{:title => 'puredata website', :href => 'http://puredata.info'}Pure Data. 
+  in keeping with the spirit of 
+  %a{:title => 'wikipedia', :href => 'https://en.wikipedia.org/wiki/Free_and_open-source_software'} FOSS 
+  the cost of the workshops is donation based. 
+  %br
+  %br
+  anyone with an interest in puredata is encouraged to attend. the format and structure of the workshops will accommodate any level of expierence with puredata. example puredata files (patches) as well as outlines with information and web links will be provided for download prior to each workshop event. each event will aim to go though the operation of puredata on some topic (or maybe several topics, depending on interest). people are invited to share information, get feedback, collaborate, and discuss. this would be a great opportunity to ask questions, get help, or to share things you have been working on.  
+  %br
+  %br 
+  we would like to accomodate the interests and schedules of those who'd like to attend. so if you would please fill out the following form it would help LACUNA in planning. 
 
 
-%h3 WORKSHOP INQUIRY FORM
+%h3 INQUIRY FORM
 
 %form(action='/' method='POST' id='pdForm')
 
@@ -40,7 +49,7 @@
   %br
   %input{:type => "checkbox", :value => "other", :name => "topicz[]", :id => "topicz8"} other
 
-  %label general date/time preference?
+  %label general day/time preference?
   %input{:type => "checkbox", :value => "saturdayafternoon", :name => "datez[]", :id => "datez1", :class => "required"} weekend afternoon
   %br
   %input{:type => "checkbox", :value => "sundayafternoon", :name => "datez[]", :id => "datez2"} weekday afternoon
@@ -57,7 +66,7 @@
   %input{:type => "radio", :value => "no", :name => "newtopd[]", :id => "newtopd2"} no
   
   %label anything else?
-  %input(type='textarea' name='other' id='other' title='Please enter some input (at least 3 characters)' class='required' minlength='3' data-autosize-input='{ "space": 20 }')
+  %input(type='text' name='other' id='other' data-autosize-input='{ "space": 20 }')
 
   %br
   %br
